@@ -1,0 +1,144 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #74ebd5 0%, #9face6 100%);
+  color: #333;
+  text-align: center;
+  padding: 20px;
+  min-height: 100vh;
+}
+h1 {
+  font-size: 38px;
+  margin-bottom: 25px;
+  color: #222;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+}
+.scoreboard {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 35px;
+  flex-wrap: wrap;
+}
+.career {
+  background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+  padding: 20px 30px;
+  border-radius: 50px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  transition: transform 0.2s;
+  cursor: pointer;
+  min-width: 180px;
+}
+.career:nth-child(2) {
+  background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+}
+.career:nth-child(3) {
+  background: linear-gradient(135deg, #fddb92 0%, #d1fdff 100%);
+}
+.career:nth-child(4) {
+  background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+}
+.career:nth-child(5) {
+  background: linear-gradient(135deg, #ff9a9e 0%, #fbc2eb 100%);
+}
+.career:hover {
+  transform: scale(1.08);
+}
+.career h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+}
+.career p {
+  font-size: 28px;
+  margin: 10px 0 0;
+  font-weight: bold;
+  color: #fff;
+}
+#question-box {
+  display: none;
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+  margin-top: 20px;
+  animation: bounceIn 0.8s ease;
+}
+#question h2 {
+  font-size: 26px;
+  color: #222;
+  margin-bottom: 15px;
+}
+#question img {
+  max-width: 250px;
+  display: block;
+  margin: 15px auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.options button {
+  display: block;
+  margin: 12px auto;
+  padding: 14px 30px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  background: #007bff;
+  color: white;
+  font-size: 18px;
+  transition: 0.3s;
+  width: 70%;
+  max-width: 350px;
+}
+.options button:hover {
+  background: #0056b3;
+  transform: scale(1.05);
+}
+button#startBtn {
+  padding: 14px 30px;
+  font-size: 20px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  background: #28a745;
+  color: white;
+  transition: 0.3s;
+  margin-bottom: 25px;
+}
+button#startBtn:hover {
+  background: #218838;
+  transform: scale(1.08);
+}
+.confetti {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  animation: fadeOut 4s ease forwards;
+}
+.confetti h1 {
+  color: white;
+  font-size: 50px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; display: none; }
+}
+.incorrect {
+  animation: shake 0.5s ease;
+}
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  50% { transform: translateX(10px); }
+  75% { transform: translateX(-10px); }
+  100% { transform: translateX(0); }
+}
+    
