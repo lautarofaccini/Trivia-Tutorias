@@ -172,17 +172,32 @@ function loadQuestion() {
   questionDiv.innerHTML = `<h2>${q.text}</h2>`;
   if (q.image) questionDiv.innerHTML += `<img src="${q.image}" alt="imagen">`;
 
+  // Crear array de opciones con info de si es correcta o no
+  let optionsWithCorrect = q.options.map((opt, i) => ({
+    text: opt,
+    isCorrect: i === q.correct,
+  }));
+
+  // Mezclar el array (Fisher-Yates shuffle)
+  for (let i = optionsWithCorrect.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [optionsWithCorrect[i], optionsWithCorrect[j]] = [
+      optionsWithCorrect[j],
+      optionsWithCorrect[i],
+    ];
+  }
+
   optionsDiv.innerHTML = "";
-  q.options.forEach((opt, i) => {
+  optionsWithCorrect.forEach((opt) => {
     let btn = document.createElement("button");
-    btn.textContent = opt;
-    btn.onclick = () => checkAnswer(i, q.correct, btn);
+    btn.textContent = opt.text;
+    btn.onclick = () => checkAnswer(opt.isCorrect, btn);
     optionsDiv.appendChild(btn);
   });
 }
 
-function checkAnswer(selected, correct, button) {
-  if (selected === correct) {
+function checkAnswer(isCorrect, button) {
+  if (isCorrect) {
     showConfetti();
     awaitingCareerSelection = true;
   } else {
