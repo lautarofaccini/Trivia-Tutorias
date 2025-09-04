@@ -107,6 +107,11 @@ const questions = [
     text: "El sol es...",
     options: ["un planeta", "una estrella", "luz", "un meteorito"],
     correct: 1
+  },
+  {
+    text: "¿Cuál es el único satélite natural de la Tierra?",
+    options: ["La Luna", "Fobos", "Europa", "Titán"],
+    correct: 0
   }
 ];
 
@@ -124,10 +129,10 @@ function loadQuestion() {
   let q = questions[Math.floor(Math.random() * questions.length)];
   let questionDiv = document.getElementById("question");
   let optionsDiv = document.getElementById("options");
-  
+
   questionDiv.innerHTML = `<h2>${q.text}</h2>`;
   if (q.image) questionDiv.innerHTML += `<img src="${q.image}" alt="imagen">`;
-  
+
   optionsDiv.innerHTML = "";
   q.options.forEach((opt, i) => {
     let btn = document.createElement("button");
@@ -140,7 +145,7 @@ function loadQuestion() {
 function checkAnswer(selected, correct, button) {
   if (selected === correct) {
     showConfetti();
-    awaitingCareerSelection = true; 
+    awaitingCareerSelection = true;
   } else {
     button.classList.add("incorrect");
     setTimeout(() => button.classList.remove("incorrect"), 500);
@@ -151,8 +156,8 @@ function addPoint(career) {
   if (awaitingCareerSelection) {
     scores[career - 1]++;
     document.getElementById(`score${career}`).textContent = scores[career - 1];
-    awaitingCareerSelection = false; 
-    loadQuestion(); 
+    awaitingCareerSelection = false;
+    loadQuestion();
   }
 }
 
