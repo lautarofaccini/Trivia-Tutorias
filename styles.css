@@ -135,6 +135,22 @@ button#editToggle {
   outline: inherit;
   margin-bottom: 10px;
 }
+button#endBtn {
+  display: none;
+  margin: 25px auto;
+  padding: 14px 30px;
+  font-size: 20px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  background: #dc3545;
+  color: white;
+  transition: 0.3s;
+}
+button#endBtn:hover {
+  background: #c82333;
+  transform: scale(1.08);
+}
 .confetti {
   display: none;
   position: fixed;
@@ -174,4 +190,69 @@ button#editToggle {
   margin: 0 5px;
   padding: 5px 10px;
   font-size: 14px;
+}
+#podio {
+  margin-top: 40px;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #fddb92 0%, #d1fdff 100%);
+  border-radius: 20px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+  width: 100%-20px;
+  display: none;
+}
+
+#podio h2 {
+  font-size: 32px;
+  margin-bottom: 25px;
+  color: #222;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+}
+
+.leaderboard {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+.leaderboard li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  margin: 10px 0;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.leaderboard li.first {
+  background: gold;
+  font-weight: bold;
+}
+
+.leaderboard li.second {
+  background: silver;
+}
+
+.leaderboard li.third {
+  background: #cd7f32; /* bronce */
+}
+
+.leaderboard .pos {
+  font-weight: bold;
+  min-width: 40px;
+  text-align: left;
+}
+
+.leaderboard .name {
+  flex: 1;
+  text-align: left;
+  margin-left: 10px;
+}
+
+.leaderboard .pts {
+  font-weight: bold;
 }

@@ -165,6 +165,7 @@ function startGame() {
     .getElementById("question-box")
     .scrollIntoView({ behavior: "smooth" });
   document.getElementById("startBtn").style.display = "none";
+  document.getElementById("endBtn").style.display = "block";
 }
 
 function loadQuestion() {
@@ -241,17 +242,46 @@ function showConfetti() {
 
 function toggleEditMode() {
   editMode = !editMode;
+
   document.querySelectorAll(".career").forEach((c, idx) => {
     if (editMode) {
-      c.innerHTML += `
-        <div class="edit-controls">
-          <button onclick="modifyScore(${idx + 1}, 1)">+1</button>
-          <button onclick="modifyScore(${idx + 1}, -1)">-1</button>
-        </div>`;
+      // Controles individuales (+1 / -1)
+      if (!c.querySelector(".edit-controls")) {
+        c.innerHTML += `
+          <div class="edit-controls">
+            <button onclick="modifyScore(${idx + 1}, 1)">+1</button>
+            <button onclick="modifyScore(${idx + 1}, -1)">-1</button>
+          </div>`;
+      }
     } else {
+      // Quitar controles individuales
       c.querySelectorAll(".edit-controls").forEach((e) => e.remove());
     }
   });
+
+  // Botón global de reset
+  if (editMode) {
+    if (!document.getElementById("resetAllBtn")) {
+      const resetBtn = document.createElement("button");
+      resetBtn.id = "resetAllBtn";
+      resetBtn.textContent = "🔄 Resetear todo";
+      resetBtn.onclick = resetAllScores;
+      document.querySelector(".scoreboard").after(resetBtn);
+    }
+  } else {
+    const resetBtn = document.getElementById("resetAllBtn");
+    if (resetBtn) resetBtn.remove();
+  }
+}
+
+function resetAllScores() {
+  if (confirm("¿Seguro que quieres reiniciar todos los puntos?")) {
+    scores = scores.map(() => 0);
+    scores.forEach((s, i) => {
+      document.getElementById(`score${i + 1}`).textContent = s;
+    });
+    saveScores();
+  }
 }
 
 function modifyScore(career, delta) {
@@ -275,3 +305,34 @@ function loadScores() {
 }
 
 window.onload = loadScores;
+
+function endEvent() {
+  document.getElementById("endBtn").style.display = "none";
+  document.getElementById("podio").style.display = "block";
+  let ranking = scores
+    .map((s, i) => ({
+      carrera: document.querySelector(`#carrera${i + 1} h2`).textContent,
+      puntos: s,
+    }))
+    .sort((a, b) => b.puntos - a.puntos);
+
+  let podioDiv = document.getElementById("podio");
+  podioDiv.innerHTML = `
+    <h2>🏆 Leaderboard</h2>
+    <ul class="leaderboard">
+      ${ranking
+        .map(
+          (r, idx) => `
+        <li class="${
+          idx === 0 ? "first" : idx === 1 ? "second" : idx === 2 ? "third" : ""
+        }">
+          <span class="pos">#${idx + 1}</span>
+          <span class="name">${r.carrera}</span>
+          <span class="pts">${r.puntos} pts</span>
+        </li>`
+        )
+        .join("")}
+    </ul>
+  `;
+  document.getElementById("podio").scrollIntoView({ behavior: "smooth" });
+}
