@@ -1,44 +1,52 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Trivia por Carreras</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <h1>Trivia de Carreras 🎓</h1>
-  <div class="scoreboard">
-    <div class="career" id="carrera1" onclick="addPoint(1)">
-      <h2>ISI</h2>
-      <p id="score1">0</p>
-    </div>
-    <div class="career" id="carrera2" onclick="addPoint(2)">
-      <h2>IEM</h2>
-      <p id="score2">0</p>
-    </div>
-    <div class="career" id="carrera3" onclick="addPoint(3)">
-      <h2>IQ</h2>
-      <p id="score3">0</p>
-    </div>
-    <div class="career" id="carrera4" onclick="addPoint(4)">
-      <h2>TECNICATURA</h2>
-      <p id="score4">0</p>
-    </div>
-    <div class="career" id="carrera5" onclick="addPoint(5)">
-      <h2>LAR</h2>
-      <p id="score5">0</p>
-    </div>
-  </div>
-  <button id="startBtn" onclick="startGame()">🚀 Iniciar Pregunta</button>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Trivia por Carreras</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <section class="header">
+      <button id="editToggle" onclick="toggleEditMode()">
+        <h1>Trivia de Carreras 🎓</h1>
+      </button>
+      <div class="scoreboard">
+        <div class="career" id="carrera1" onclick="addPoint(1)">
+          <h2>ISI</h2>
+          <p id="score1">0</p>
+        </div>
+        <div class="career" id="carrera2" onclick="addPoint(2)">
+          <h2>IEM</h2>
+          <p id="score2">0</p>
+        </div>
+        <div class="career" id="carrera3" onclick="addPoint(3)">
+          <h2>IQ</h2>
+          <p id="score3">0</p>
+        </div>
+        <div class="career" id="carrera4" onclick="addPoint(4)">
+          <h2>TECNICATURA</h2>
+          <p id="score4">0</p>
+        </div>
+        <div class="career" id="carrera5" onclick="addPoint(5)">
+          <h2>LAR</h2>
+          <p id="score5">0</p>
+        </div>
+      </div>
+    </section>
+    <button id="startBtn" onclick="startGame()">🚀 Iniciar Pregunta</button>
 
-  <div id="question-box">
-    <div id="question"></div>
-    <div class="options" id="options"></div>
-  </div>
-  <div class="confetti" id="confetti">
-    <h1>¡Correcto! 🎉</h1>
-  </div>
+    <div id="question-box">
+      <div>
+        <div id="question"></div>
+        <div class="options" id="options"></div>
+      </div>
+      <button id="skipBtn" onclick="skipQuestion()">⏭️ Saltar Pregunta</button>
+    </div>
 
-  <script src="script.js"></script>
-</body>
+    <div class="confetti" id="confetti">
+      <h1>¡Correcto! 🎉</h1>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
 </html>

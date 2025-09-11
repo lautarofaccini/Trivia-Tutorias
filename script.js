@@ -129,7 +129,7 @@ const questions = [
   },
   {
     text: "¿Cual es la ciencia que estudia las propiedades de la materia y la energia?",
-    options: ["La quimica", "Fisica", "Biologia", "Matematicas"],
+    options: ["Quimica", "Fisica", "Biologia", "Matematicas"],
     correct: 1,
   },
   {
@@ -160,8 +160,10 @@ let awaitingCareerSelection = false;
 function startGame() {
   document.getElementById("question-box").style.display = "block";
   loadQuestion();
-  document.getElementById("startBtn").disabled = true;
-  document.getElementById("startBtn").style.opacity = 0.6;
+  document
+    .getElementById("question-box")
+    .scrollIntoView({ behavior: "smooth" });
+  document.getElementById("startBtn").style.display = "none";
 }
 
 function loadQuestion() {
@@ -196,10 +198,18 @@ function loadQuestion() {
   });
 }
 
+function skipQuestion() {
+  if (!awaitingCareerSelection) {
+    loadQuestion();
+  }
+}
+
 function checkAnswer(isCorrect, button) {
   if (isCorrect) {
     showConfetti();
     awaitingCareerSelection = true;
+    document.querySelector(".header").scrollIntoView({ behavior: "smooth" });
+    document.getElementById("skipBtn").style.disabled = true;
   } else {
     button.classList.add("incorrect");
     setTimeout(() => button.classList.remove("incorrect"), 500);
@@ -211,6 +221,10 @@ function addPoint(career) {
     scores[career - 1]++;
     document.getElementById(`score${career}`).textContent = scores[career - 1];
     awaitingCareerSelection = false;
+    document
+      .getElementById("question-box")
+      .scrollIntoView({ behavior: "smooth" });
+    document.getElementById("skipBtn").style.disabled = false;
     loadQuestion();
   }
 }
