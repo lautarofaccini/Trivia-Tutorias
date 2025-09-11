@@ -20,7 +20,7 @@ const questions = [
     text: "¿Que objeto es este?",
     image:
       "https://tse1.mm.bing.net/th/id/OIP.8r0dDnl6DA_t3hddAAf-dwHaGY?rs=1&pid=ImgDetMain&o=7&rm=3",
-    options: ["Martillo", "destornillador", "Llave inglesa", "Llave francesa"],
+    options: ["Martillo", "Destornillador", "Llave inglesa", "Llave francesa"],
     correct: 2,
   },
   {
@@ -113,7 +113,7 @@ const questions = [
       "Ingenieria Quimica",
       "Ingenieria en Sistemas de Informacion",
       "Ingenieria Electromecanica",
-      "LAR",
+      "Licenciatura en Administración Rural",
     ],
     correct: 0,
   },
@@ -156,6 +156,7 @@ const questions = [
 
 let scores = [0, 0, 0, 0, 0];
 let awaitingCareerSelection = false;
+let editMode = false;
 
 function startGame() {
   document.getElementById("question-box").style.display = "block";
@@ -220,6 +221,7 @@ function addPoint(career) {
   if (awaitingCareerSelection) {
     scores[career - 1]++;
     document.getElementById(`score${career}`).textContent = scores[career - 1];
+    saveScores();
     awaitingCareerSelection = false;
     document
       .getElementById("question-box")
@@ -236,3 +238,40 @@ function showConfetti() {
     confetti.style.display = "none";
   }, 500);
 }
+
+function toggleEditMode() {
+  editMode = !editMode;
+  document.querySelectorAll(".career").forEach((c, idx) => {
+    if (editMode) {
+      c.innerHTML += `
+        <div class="edit-controls">
+          <button onclick="modifyScore(${idx + 1}, 1)">+1</button>
+          <button onclick="modifyScore(${idx + 1}, -1)">-1</button>
+        </div>`;
+    } else {
+      c.querySelectorAll(".edit-controls").forEach((e) => e.remove());
+    }
+  });
+}
+
+function modifyScore(career, delta) {
+  scores[career - 1] = Math.max(0, scores[career - 1] + delta);
+  document.getElementById(`score${career}`).textContent = scores[career - 1];
+  saveScores();
+}
+
+function saveScores() {
+  localStorage.setItem("scores", JSON.stringify(scores));
+}
+
+function loadScores() {
+  const saved = localStorage.getItem("scores");
+  if (saved) {
+    scores = JSON.parse(saved);
+    scores.forEach((s, i) => {
+      document.getElementById(`score${i + 1}`).textContent = s;
+    });
+  }
+}
+
+window.onload = loadScores;
